@@ -5,8 +5,9 @@ const inputFields = document.querySelectorAll("input");
 
 class App {
   constructor() {
-    this.timerArr = []; // array to manage all timers
-
+    // array to manage all timers
+    this.timerArr = [];
+    
     // listeners to manage events
     form.addEventListener("submit", this.setTimer.bind(this));
     timerContainer.addEventListener("click", this.handleActions.bind(this));
@@ -39,6 +40,9 @@ class App {
 
     //method to insert timer in dom
     this.insertTimer(timer);
+
+    // tone obj for each timer
+    timer.toneObj = this.timerEndTone();
 
     //toggle banner text to change no timer state
     this.toggleEmptyTimerBanner();
@@ -89,7 +93,7 @@ class App {
     if (timer.totalTime <= 0) {
       clearInterval(timer.intervalId);
       this.timerEnd(timer.id);
-      this.timerEndTone();
+      this.timerEndTonePlay(timer.toneObj);
     }
     timer.secondsRemaining = timer.totalTime % 60;
     timer.minutesRemaining = Math.floor(timer.totalTime / 60);
@@ -112,18 +116,13 @@ class App {
             <div>${(timer.secondsRemaining + "").padStart(2, "0")}</div>`;
   }
 
-  timerEndTone() {
-    const tone = new Audio();
-    tone.src = "timer-end-tone.wav";
-    tone.play();
-  }
-
   handleDeleteTimer(deleteBtn) {
     const timerELe = deleteBtn.closest(".timer-number");
     const id = timerELe.dataset.id;
     const idx = this.timerArr.findIndex((ele) => {
       return ele.id == id;
     });
+    this.timerEndToneStop(this.timerArr[idx].toneObj);
     clearInterval(this.timerArr[idx].intervalId);
     this.updateTimerArray(id);
     timerELe.remove();
@@ -136,6 +135,20 @@ class App {
     });
   }
 
+  timerEndTone() {
+    const tone = new Audio();
+    tone.src = "timer-end-tone.wav";
+    return tone;
+  }
+
+  timerEndTonePlay(tone) {
+    tone.play();
+  }
+
+  timerEndToneStop(tone) {
+    tone.pause();
+  }
+
   handleActions(e) {
     if (
       e.target.classList.contains("btn-delete") ||
@@ -146,10 +159,14 @@ class App {
   }
 
   timerEnd(id) {
-    const timerEnd = document.querySelector(`.timer-number[data-id='${id}'] .timer-end`);
-    const timerEle = document.querySelector(`.timer-number[data-id='${id}'] .timer`);
+    const timerEnd = document.querySelector(
+      `.timer-number[data-id='${id}'] .timer-end`
+    );
+    const timerEle = document.querySelector(
+      `.timer-number[data-id='${id}'] .timer`
+    );
 
-    timerEle.classList.add('visible-hidden');
+    timerEle.classList.add("visible-hidden");
     timerEnd.classList.remove("hidden");
   }
 
