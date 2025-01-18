@@ -96,7 +96,7 @@ class App {
       this.timerEndTonePlay(timer.toneObj);
     }
     timer.secondsRemaining = timer.totalTime % 60;
-    timer.minutesRemaining = Math.floor(timer.totalTime / 60);
+    timer.minutesRemaining = Math.floor((timer.totalTime / 60) % 60);
     timer.hoursRemaining = Math.floor(timer.totalTime / 3600);
     timer.totalTime--;
   }
