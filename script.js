@@ -5,9 +5,8 @@ const inputFields = document.querySelectorAll("input");
 
 class App {
   constructor() {
-    // array to manage all timers
-    this.timerArr = [];
-    
+    this.timerArr = []; // array to manage all timers
+
     // listeners to manage events
     form.addEventListener("submit", this.setTimer.bind(this));
     timerContainer.addEventListener("click", this.handleActions.bind(this));
@@ -137,7 +136,7 @@ class App {
 
   timerEndTone() {
     const tone = new Audio();
-    tone.src = "timer-end-tone.wav";
+    tone.src = "asset/timer-end-tone.wav";
     return tone;
   }
 
