@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Frontend 3 Week 1 Contest</title>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+
+    <header class="header">
+      <h1 class="App-heading">Multiple Timers App</h1>
+      <form class="form" action="">
+        <div class="timer">
+          <span class="text">Set Time:</span>
+          <div class="time">
+            <input
+              type="number"
+              min="0"
+              id="hours"
+              placeholder="hh"
+              name="hours"
+            />
+            <span>:</span>
+            <input
+              type="number"
+              min="0"
+              id="minutes"
+              placeholder="mm"
+              name="minutes"
+            />
+            <span>:</span>
+            <input
+              type="number"
+              min="0"
+              id="seconds"
+              placeholder="ss"
+              name="seconds"
+            />
+          </div>
+          <button class="btn btn-set" type="submit">Set</button>
+        </div>
+      </form>
+
+      <span class="timer-log">Current Timers</span>
+    </header>
+    <main class="main">
+      <span class="empty-log">You have no timers currently!</span>
+      <div class="timers-container"></div>
+    </main>
+    
+  </body>
+</html>
