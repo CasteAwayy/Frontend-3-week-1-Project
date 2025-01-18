@@ -149,7 +149,7 @@ class App {
     const timerEnd = document.querySelector(`.timer-number[data-id='${id}'] .timer-end`);
     const timerEle = document.querySelector(`.timer-number[data-id='${id}'] .timer`);
 
-    timerEle.classList.add('hidden');
+    timerEle.classList.add('visible-hidden');
     timerEnd.classList.remove("hidden");
   }
 
